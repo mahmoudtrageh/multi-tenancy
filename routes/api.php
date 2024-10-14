@@ -43,7 +43,7 @@ foreach (config('tenancy.central_domains', []) as $domain) {
 
         Route::post('/create-tenant', [HomeController::class, 'create_tenant'])->middleware('auth:sanctum');
 
-        // Route::get('/paypal-payment/{data}', [PaypalPaymentController::class, 'pay'])->middleware('auth:sanctum');
+        Route::get('/paypal-payment/{data}', [PaypalPaymentController::class, 'pay'])->middleware('auth:sanctum');
         Route::get('/paypal-success', [PaypalPaymentController::class, 'success'])->name('paypal.success');
         Route::get('/paypal-cancel', [PaypalPaymentController::class, 'cancel'])->name('paypal.cancel');
 
