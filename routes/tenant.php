@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Tenant\v1\AuthController;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use App\Http\Middleware\TenantDatabase;
 use App\Http\Middleware\UniversalRoutes;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Tenant\Admin\AuthController;
 
 Route::prefix('api')
     ->middleware([
@@ -25,5 +25,9 @@ Route::prefix('api')
                 return $request->user();
             });
         });
+
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+        Route::post('/register', [AuthController::class, 'register']);
 
     });
