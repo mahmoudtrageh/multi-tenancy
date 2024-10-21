@@ -7,10 +7,11 @@ use Stancl\Tenancy\Contracts\TenantWithDatabase;
 use Stancl\Tenancy\Database\Concerns\HasDatabase;
 use Illuminate\Support\Str;
 use Stancl\Tenancy\Database\Concerns\HasDomains;
-
-class Tenant extends BaseTenant implements TenantWithDatabase
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+class Tenant extends BaseTenant implements TenantWithDatabase, HasMedia
 {
-    use HasDatabase, HasDomains;
+    use HasDatabase, HasDomains, InteractsWithMedia;
 
     protected $connection = 'mysql';
     protected $table = 'tenants';

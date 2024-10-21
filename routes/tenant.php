@@ -7,6 +7,7 @@ use App\Http\Middleware\TenantDatabase;
 use App\Http\Middleware\UniversalRoutes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Tenant\Admin\AuthController;
+use App\Http\Controllers\Api\Tenant\Admin\ProfileController;
 
 Route::prefix('api')
     ->middleware([
@@ -29,5 +30,8 @@ Route::prefix('api')
         Route::post('/login', [AuthController::class, 'login']);
         Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
         Route::post('/register', [AuthController::class, 'register']);
+
+        Route::get('/profile/{user}', [ProfileController::class, 'index'])->middleware('auth:sanctum');
+        Route::post('/update-profile/{user}', [ProfileController::class, 'updateProfile'])->middleware('auth:sanctum');
 
     });
