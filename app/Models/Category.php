@@ -15,4 +15,19 @@ class Category extends Model implements HasMedia
         'slug',
         'description',
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function sub_category()
+    {
+        return $this->belongsTo(SubCategory::class);
+    }
+
+    public function sub_sub_category()
+    {
+        return $this->belongsTo(SubSubCategory::class);
+    }
 }

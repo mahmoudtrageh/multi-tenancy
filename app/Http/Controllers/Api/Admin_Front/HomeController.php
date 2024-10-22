@@ -20,7 +20,7 @@ class HomeController extends Controller
     }
     public function getPackages()
     {
-        return Package::with('features')->get();
+        return Package::with(relations: 'features')->get();
     }
 
     public function create_tenant(Request $request)

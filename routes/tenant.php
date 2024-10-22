@@ -8,6 +8,7 @@ use App\Http\Middleware\UniversalRoutes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Tenant\Admin\AuthController;
 use App\Http\Controllers\Api\Tenant\Admin\ProfileController;
+use App\Http\Controllers\Api\Tenant\Front\HomeController;
 
 Route::prefix('api')
     ->middleware([
@@ -34,4 +35,7 @@ Route::prefix('api')
         Route::get('/profile/{user}', [ProfileController::class, 'index'])->middleware('auth:sanctum');
         Route::post('/update-profile/{user}', [ProfileController::class, 'updateProfile'])->middleware('auth:sanctum');
 
+        Route::get('/home/products', [HomeController::class, 'getProducts']);
+        Route::get('/home/categories', [HomeController::class, 'getCategories']);
+        Route::get('/home/brands', [HomeController::class, 'getBrands']);
     });
