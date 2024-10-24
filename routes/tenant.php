@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Tenant\Admin\AuthController;
 use App\Http\Controllers\Api\Tenant\Admin\ProfileController;
 use App\Http\Controllers\Api\Tenant\Front\HomeController;
+use App\Http\Controllers\Api\Tenant\Front\CartController;
 
 Route::prefix('api')
     ->middleware([
@@ -26,6 +27,11 @@ Route::prefix('api')
             Route::get('/user', function (Request $request) {
                 return $request->user();
             });
+
+            Route::post('/cart/add/{product}', [CartController::class, 'addToCart']);
+            Route::get('/cart', [CartController::class, 'showCart']);
+            Route::delete('/cart/remove/{product}', [CartController::class, 'removeFromCart']);
+            Route::post('/cart/increase/{product}', [CartController::class, 'increaseQuantity']); // New route
         });
 
         Route::post('/login', [AuthController::class, 'login']);
